@@ -1,0 +1,3 @@
+= turbo_stream.remove @passenger
+= turbo_stream.replace 'total-weight' do
+  = render partial: 'flights/total_weight', locals: {flight: @flight}

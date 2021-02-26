@@ -1,0 +1,8 @@
+ul aria-role="menubar"
+  li: h1: span= t('common.title')
+  li class=("active" if my_flights?)
+    = link_to t('nav.my_flights'), flights_url, aria: {role: 'menuitem'}
+  li class=("active" if add_flight?)
+    = link_to t('nav.add_flight'), new_flight_url, aria: {role: 'menuitem'}
+  li.spacer aria-role="none"
+  li= button_to t('nav.log_out'), destroy_pilot_session_url, class: 'link', method: :delete

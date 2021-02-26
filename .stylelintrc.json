@@ -1,0 +1,14 @@
+{
+  "extends": "stylelint-config-sass-guidelines",
+  "rules": {
+    "color-named": null,
+    "function-parentheses-space-inside": "never-single-line",
+    "max-nesting-depth": null,
+    "property-no-unknown": [true, {
+      "ignoreProperties": ["text-fill-color"]
+    }],
+    "selector-class-pattern": null,
+    "selector-max-id": null,
+    "selector-no-qualifying-type": null
+  }
+}

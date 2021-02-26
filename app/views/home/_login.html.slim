@@ -1,0 +1,20 @@
+= turbo_frame_tag 'login-frame' do
+  - if defined?(failure) && failure
+    p.error= t 'home.login.failure'
+
+  = form_with model: pilot, url: session_path(:pilot), namespace: 'login' do |f|
+    fieldset
+      = f.label :email
+      = f.email_field :email, autofocus: true, autocomplete: 'email', required: true
+
+    fieldset
+      = f.label :password
+      = f.password_field :password, autocomplete: 'current-password', required: true
+
+    fieldset
+      = f.check_box :remember_me
+      = f.label :remember_me
+
+    fieldset.actions
+      = f.submit t('helpers.submit.pilot.login'), data: {action: 'click->home#submit' }
+      = link_to t('home.login.forgot_password'), new_password_url(:pilot), target: '_top'

@@ -1,0 +1,48 @@
+@use 'vars';
+@use 'colors';
+
+html,
+body {
+  background-color: vars.$background-color;
+  height: 100vh;
+}
+
+body {
+  display: grid;
+  grid-template-areas:
+    'header header header'
+    '. main .'
+    'footer footer footer';
+  grid-template-columns: auto minmax(320px, 640px) auto;
+  grid-template-rows: vars.$header-height 1fr vars.$footer-height;
+
+  > nav {
+    grid-area: header;
+    padding: vars.$body-padding;
+  }
+
+  > main {
+    grid-area: main;
+    padding: vars.$body-padding;
+  }
+
+  > footer {
+    align-items: center;
+    background-color: colors.$middle-blue;
+    grid-area: footer;
+    text-align: center;
+
+    p {
+      color: white;
+      line-height: vars.$footer-height;
+      margin: 0;
+      padding: 0;
+    }
+
+    a {
+      border: 0;
+      color: white;
+      font-weight: bold;
+    }
+  }
+}

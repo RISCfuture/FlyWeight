@@ -1,0 +1,25 @@
+h1= t 'flights.edit.title', date: @flight.date&.to_formatted_s(:long) || "<no date>"
+
+p= t 'flights.edit.share'
+p= t 'flights.edit.owner'
+
+h2= t 'flights.edit.header.passengers'
+
+= turbo_stream_from @flight, :passengers
+
+#passengers
+  - if @flight.passenger_count.zero?
+    p.empty= t('flights.edit.no_passengers')
+  - else
+    = render @flight.passengers.to_a.select(&:persisted?)
+
+hr
+
+= render partial: 'flights/total_weight', locals: {flight: @flight}
+
+= render partial: 'passengers/form', locals: {flight: @flight, passenger: @passenger}
+
+h2= t 'flights.edit.header.edit'
+= render partial: 'flights/form', locals: {flight: @flight}
+
+p= button_to t('flights.edit.delete'), @flight, method: :delete, class: 'link', target: '_top'

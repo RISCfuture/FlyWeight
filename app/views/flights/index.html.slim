@@ -1,0 +1,9 @@
+h1= t 'flights.index.title'
+
+= turbo_stream_from current_pilot, :flights
+
+#flights
+  - if @flights.empty?
+    .empty= t('flights.index.no_flights')
+  - else
+    = render @flights

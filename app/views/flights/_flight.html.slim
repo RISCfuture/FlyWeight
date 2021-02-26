@@ -1,0 +1,8 @@
+= turbo_frame_tag flight do
+  = link_to flight, class: 'flight-list-item', target: '_top' do
+    .header
+      .date= flight.date.to_formatted_s(:long)
+      .passengers= pluralize flight.passenger_count, t('common.passenger')
+
+    - if flight.description?
+      p.description= flight.description

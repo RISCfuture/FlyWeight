@@ -1,0 +1,33 @@
+@use 'colors';
+
+$body-color: colors.$raisin-black;
+$background-color: white;
+$link-color: colors.$resolution-blue;
+
+$header-height: 50px;
+$footer-height: 50px;
+$body-padding: 10px;
+
+$gradient-1: repeating-linear-gradient(315deg, colors.$fandango 0, colors.$resolution-blue 50px, colors.$fandango 100px);
+$gradient-2: repeating-linear-gradient(315deg, colors.$middle-blue 0, colors.$cultured 100px, colors.$middle-blue 200px);
+
+@mixin border-gradient($width) {
+  border: $width solid;
+  border-image-slice: 1;
+}
+
+@mixin text-gradient($gradient) {
+  background: $gradient;
+  background-clip: text;
+
+  // otherwise the gradient background expands to fill the whole div
+  display: inline-block;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+}
+
+@mixin slant($padding-v: 0, $margin-v: 0) {
+  border-radius: 50px 20px;
+  margin: $margin-v 20px $margin-v -20px;
+  padding: $padding-v 20px;
+}

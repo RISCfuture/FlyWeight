@@ -1,0 +1,22 @@
+= turbo_frame_tag 'signup-frame' do
+  = form_with model: pilot, url: registration_path(:pilot), namespace: 'signup' do |f|
+    = render partial: 'home/errors', locals: {resource: pilot}
+
+    fieldset
+      = f.label :name
+      = f.text_field :name, required: true
+
+    fieldset
+      = f.label :email
+      = f.email_field :email, autocomplete: 'email', required: true
+
+    fieldset
+      = f.label :password
+      = f.password_field :password, autocomplete: 'new-password', required: true
+
+    fieldset
+      = f.label :password_confirmation
+      = f.password_field :password_confirmation, autocomplete: 'new-password', required: true
+
+    fieldset.actions
+      = f.submit data: {action: 'click->home#submit' }

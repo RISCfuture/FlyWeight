@@ -1,0 +1,17 @@
+h1
+  span= t 'common.title'
+h2= t 'home.subtitle'
+
+p.lede== t 'home.lede'
+
+.tabs aria-role="tablist"
+  ul
+    li#login-tab data-home-target="tab" data-action="click->home#switch" data-index=0 aria-role="tab" aria-controls="login-container"
+      = t 'home.tabs.login'
+    li#signup-tab data-home-target="tab" data-action="click->home#switch" data-index=1 aria-role="tab" aria-controls="signup-container"
+      = t 'home.tabs.signup'
+
+  .tab#login-container data-home-target="content" aria-role="tabpanel" aria-labelledby="login-tab"
+    = render partial: 'home/login', locals: {pilot: @pilot, failure: @failure}
+  .tab#signup-container data-home-target="content" aria-role="tabpanel" aria-labelledby="signup-tab"
+    = render partial: 'home/signup', locals: {pilot: @pilot}

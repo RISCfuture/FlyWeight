@@ -1,0 +1,19 @@
+@for $weight from 1 through 9 {
+  @font-face {
+    font-display: swap;
+    font-family: 'Archivo';
+    font-style: normal;
+    font-variation-settings: 'wght' $weight*100;
+    font-weight: $weight*100;
+    src: url('fonts/archivo.ttf');
+  }
+
+  @font-face {
+    font-display: swap;
+    font-family: 'Archivo';
+    font-style: italic;
+    font-variation-settings: 'wght' $weight*100;
+    font-weight: $weight*100;
+    src: url('fonts/archivo-italic.ttf');
+  }
+}

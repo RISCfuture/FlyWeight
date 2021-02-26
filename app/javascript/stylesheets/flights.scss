@@ -1,0 +1,59 @@
+@use 'colors';
+@use 'vars';
+
+a.flight-list-item {
+  @include vars.slant;
+  border: 0;
+  display: block;
+  margin-bottom: 20px;
+  padding: 5px;
+
+  &:hover {
+    background: vars.$gradient-2, colors.$cultured;
+  }
+
+  .header {
+    align-items: baseline;
+    display: flex;
+    flex-flow: row wrap;
+
+    .date {
+      font-size: 16pt;
+      font-weight: 700;
+      margin-right: 0.5em;
+    }
+
+    .passengers {
+      font-size: 12pt;
+      font-weight: 200;
+      margin-right: 0.5em;
+    }
+  }
+
+  .description {
+    font-size: 12pt;
+    margin: 0;
+  }
+}
+
+hr {
+  border: 1px solid vars.$body-color;
+  margin: 5px 0;
+}
+
+#total-weight {
+  align-items: baseline;
+  display: flex;
+  flex-flow: row nowrap;
+  margin-bottom: 10px;
+
+  .name {
+    font-weight: 700;
+    margin-right: 0.5em;
+  }
+
+  .weight {
+    font-size: 14pt;
+    font-weight: 200;
+  }
+}

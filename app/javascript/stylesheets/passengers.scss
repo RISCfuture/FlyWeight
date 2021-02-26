@@ -1,0 +1,64 @@
+@use 'colors';
+@use 'vars';
+
+.passenger-list-item {
+  @include vars.slant($padding-v: 2.5px);
+  align-items: center;
+  display: flex;
+  flex-flow: row nowrap;
+
+  &:hover {
+    background: vars.$gradient-2, colors.$cultured;
+
+    .delete { display: block; }
+  }
+
+  .name {
+    font-weight: 700;
+    margin-right: 0.5em;
+  }
+
+  .weight {
+    font-size: 14pt;
+    font-weight: 200;
+  }
+
+  .delete {
+    display: none;
+    flex-grow: 1;
+    text-align: right;
+
+    input[type=submit] {
+      background: none;
+      border: 0;
+      color: vars.$body-color;
+      font-weight: 700;
+      margin: 0;
+      padding: 0;
+
+      &:active {
+        transform: translate(1px, 1px);
+      }
+    }
+  }
+}
+
+// reduce the size of the weight input
+#passenger_weight {
+  width: 100px;
+}
+
+// increase spacing between sections on flights/edit
+#new-passenger-frame form {
+  margin-bottom: 40px;
+}
+
+// tighten up spacing between new pax form and pax list
+#passengers p {
+  margin: 10px 0;
+}
+
+#passenger-welcome {
+  p,
+  blockquote { font-size: 12pt; }
+}

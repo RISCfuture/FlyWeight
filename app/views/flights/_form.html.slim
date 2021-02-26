@@ -1,0 +1,14 @@
+= turbo_frame_tag 'flight-form-frame' do
+  = form_with model: flight do |f|
+    = render partial: 'home/errors', locals: {resource: flight}
+
+    fieldset
+      = f.label :date
+      = f.date_field :date, required: true, data: {flights_target: 'date'}
+
+    fieldset
+      = f.label :description
+      = f.text_area :description
+
+    fieldset.actions
+      = f.submit data: {action: 'click->flights#submit' }

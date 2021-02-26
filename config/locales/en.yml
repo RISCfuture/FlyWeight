@@ -1,0 +1,98 @@
+en:
+  common:
+    title: FlyWeight
+    passenger: passenger
+    pound: lb.
+  home:
+    subtitle: Passenger weights in the cloud! (Not that kind of cloud.)
+    lede: >-
+      <strong>FlyWeight</strong> is a website that lets passengers discreetly
+      inform pilots of their weight in a private manner. No account is necessary
+      for passengers and no one but the pilot can see each passenger’s weight.
+    tabs:
+      login: Log In
+      signup: Sign Up
+    login:
+      forgot_password: Forgot password?
+      failure: Email or password was incorrect.
+  footer:
+    text: Created by %{link} in 2021.
+    author: Tim Morgan
+  nav:
+    my_flights: My Flights
+    add_flight: Add a Flight
+    log_out: Log Out
+  flights:
+    index:
+      no_flights: No flights yet.
+      title: Flights
+    edit:
+      title: Flight on %{date}
+      no_passengers: No passengers yet.
+      total_weight: Total
+      share: >-
+        Share a link to this page with your passengers so they can privately add
+        their weights. They will not be able to see anyone else’s weight, only
+        add their own.
+      owner: "Here’s what you can see that they can’t:"
+      header:
+        passengers: Passengers
+        edit: Edit Flight
+      delete: Delete Flight
+    show:
+      explanation: >-
+        If so, you should add your weight down below so your pilot can do their
+        proper pre-flight planning. It’s important not to takeoff overweight,
+        which is why you’re being asked to reveal your weight.
+      explanation2: >-
+        Your weight will not be shared with anyone except the pilot. It will be
+        available to the pilot only until one week after the flight.
+      title: Are you going on a flight with %{name} on %{date}?
+      form: My name is | [name] || and I weigh | [weight] | pounds. || [submit]
+    new:
+      title: Create Flight
+  passengers:
+    show:
+      title: Thanks, %{name}!
+      body: "%{name} has your weight info. See you in the skies!"
+  helpers:
+    submit:
+      pilot:
+        create: Sign Up
+        login: Log In
+      passenger:
+        create: Add Passenger
+        create_self: Can’t wait to go fly!
+        destroy: Delete Passenger
+  errors:
+    messages:
+      accepted: must be accepted.
+      blank: can’t be blank.
+      confirmation: doesn’t match confirmation.
+      empty: can’t be empty.
+      equal_to: must be equal to %{count}.
+      even: must be even.
+      exclusion: reserved.
+      greater_than: must be greater than %{count}.
+      greater_than_or_equal_to: must be greater than or equal to %{count}.
+      inclusion: not acceptable.
+      incorrect_type: incorrect type.
+      invalid: invalid.
+      invalid_email: not a valid email address.
+      less_than: must be less than %{count}.
+      less_than_or_equal_to: must be less than or equal to %{count}.
+      not_a_number: not a number.
+      not_an_integer: not an integer.
+      odd: must be odd.
+      taken: already taken.
+      too_long: must be %{count} characters or shorter.
+      too_short: must be %{count} characters or longer.
+      wrong_length: must be %{count} characters long.
+      invalid_date: not a valid date.
+      invalid_time: not a valid time.
+      invalid_datetime: not a valid date and time.
+      is_at: must be at %{restriction}.
+      before: must be before %{restriction}.
+      on_or_before: must be on or before %{restriction}.
+      after: must be after %{restriction}.
+      on_or_after: must be on or after %{restriction}.

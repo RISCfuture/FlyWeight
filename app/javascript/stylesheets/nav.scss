@@ -1,0 +1,42 @@
+@use 'vars';
+
+nav {
+  ul {
+    align-items: center;
+    display: flex;
+    flex-flow: row nowrap;
+    margin: 0;
+    padding: 0;
+
+    li {
+      border-bottom: 5px solid vars.$background-color;
+      font-size: 12pt;
+      list-style-type: none;
+      margin: 0 5px;
+      padding: 0;
+
+      &.spacer {
+        flex-grow: 1;
+      }
+
+      &.active {
+        border-bottom-color: vars.$link-color;
+      }
+    }
+  }
+
+  h1 {
+    font-size: 16pt;
+    margin: 0;
+
+    span {
+      font-size: 16pt;
+    }
+  }
+
+  a {
+    border: 0;
+    font-size: 14pt;
+    padding: 0;
+  }
+}

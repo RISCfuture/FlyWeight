@@ -1,0 +1,127 @@
+@use 'vars';
+@use 'colors';
+
+$animation-speed: 3s;
+
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+
+  100% {
+    background-position: 200px 0;
+  }
+}
+
+fieldset {
+  border: 0;
+  margin: 20px 0;
+  padding: 0;
+}
+
+label {
+  display: block;
+  font-size: 12pt;
+  font-stretch: condensed;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+input[type=text],
+input[type=email],
+input[type=password],
+input[type=number],
+textarea {
+  @include vars.border-gradient(3px);
+
+  appearance: none;
+  border-image-source: vars.$gradient-1;
+  display: block;
+  outline: none;
+
+  padding: 5px 10px;
+
+  &:focus {
+    //TODO
+  }
+}
+
+input[type=checkbox] + label {
+  display: inline-block;
+  margin-left: 1em;
+}
+
+button,
+input[type=submit],
+input[type=button] {
+  @include vars.slant;
+  appearance: none;
+  background: vars.$gradient-1, colors.$resolution-blue;
+  background-size: 200px 50px;
+  border: 0;
+  color: white;
+
+  cursor: pointer;
+  padding: 10px;
+
+  &:active {
+    transform: translate(5px, 5px);
+  }
+
+  &.processing {
+    animation: shimmer $animation-speed linear infinite;
+  }
+}
+
+fieldset.actions {
+  > * {
+    margin: 0 10px;
+  }
+
+  > a {
+    font-size: 11pt;
+  }
+}
+
+.error,
+.error p,
+.error li {
+  color: colors.$fandango;
+  font-size: 12pt;
+
+  h2 {
+    color: colors.$fandango;
+    font-size: 12pt;
+    font-weight: bold;
+  }
+}
+
+.field_with_errors label {
+  color: colors.$fandango;
+}
+
+form.inline {
+  align-items: center;
+  display: flex;
+  flex-flow: row wrap;
+
+  fieldset {
+    margin: 5px 0;
+
+    &:not(:last-child) {
+      margin-right: 10px;
+    }
+  }
+
+  label {
+    display: none;
+  }
+
+  input,
+  select,
+  textarea {
+    font-size: 12pt;
+    max-width: 200px;
+  }
+
+}

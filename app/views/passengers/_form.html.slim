@@ -1,0 +1,13 @@
+= turbo_frame_tag 'new-passenger-frame' do
+  = render partial: 'home/errors', locals: {resource: passenger}
+  = form_with model: [flight, passenger], class: 'inline' do |f|
+    fieldset
+      = f.label :name
+      = f.text_field :name, placeholder: Flight.human_attribute_name(:name), required: true
+
+    fieldset
+      = f.label :weight
+      = f.number_field :weight, placeholder: Flight.human_attribute_name(:weight), required: true, min: 1, step: 1
+
+    fieldset.actions
+      = f.submit data: {action: 'click->passengers#submit' }

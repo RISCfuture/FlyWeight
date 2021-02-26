@@ -1,0 +1,24 @@
+@use 'vars';
+@use 'colors';
+
+.tabs {
+  > ul {
+    border-bottom: 1px solid colors.$resolution-blue;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+
+    > li {
+      color: colors.$resolution-blue;
+      cursor: pointer;
+      font-weight: 500;
+      padding: 0 10px 5px;
+
+      &.active {
+        border-bottom: 5px solid colors.$resolution-blue;
+      }
+    }
+  }
+}

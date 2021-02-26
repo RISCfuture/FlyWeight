@@ -1,0 +1,27 @@
+doctype html
+html class="no-js" lang="en"
+  head
+    meta charset="utf-8" /
+    title FlyWeight: Discreet weight and balance
+    meta name="description" content="Discreet passenger weight reporting for pilots" /
+    meta name="viewport" content="width=device-width, initial-scale=1" /
+    meta name="theme-color" content="#14248a" /
+
+    link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16" /
+    link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32" /
+    link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" /
+    link rel="apple-touch-icon" href="/apple-touch-icon-iphone-retina.png" /
+    link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-iphone-6p.png" /
+    link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-ipad-retina.png" /
+    link rel="apple-touch-icon" sizes="167x167" href="/apple-touch-icon-ipad-pro.png" /
+    link rel="mask-icon" href="/pinned-tab.svg" color="#B43E8F" /
+
+    = yield :head
+    = stylesheet_pack_tag 'application', nonce: content_security_policy_nonce, 'data-turbo-track': 'reload'
+    = javascript_pack_tag 'application', nonce: true, 'data-turbo-track': 'reload'
+
+  body data-controller=controller_name
+    - if pilot_signed_in?
+      nav= render partial: 'nav'
+    main= yield
+    footer= render partial: 'footer'

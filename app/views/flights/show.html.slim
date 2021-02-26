@@ -1,0 +1,9 @@
+h2= t 'flights.show.title', date: @flight.date.to_formatted_s(:long), name: @flight.pilot.name
+
+#passenger-welcome
+  - if @flight.description?
+    blockquote= @flight.description
+  p= t 'flights.show.explanation'
+  p= t 'flights.show.explanation2'
+
+= render partial: 'passengers/create_form', locals: {passenger: @passenger}
