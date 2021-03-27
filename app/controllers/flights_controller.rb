@@ -3,8 +3,9 @@
 # Only the {#show} action is available to non-pilots.
 
 class FlightsController < ApplicationController
-  before_action :find_flight, except: %i[index new create]
   before_action :authenticate_pilot!, except: :show
+  before_action :find_any_flight, only: :show
+  before_action :find_my_flight, only: %i[update destroy]
 
   # Displays a list of the current pilot's flights.
   #
@@ -14,12 +15,12 @@ class FlightsController < ApplicationController
   # * `GET /flights`
 
   def index
-    @flights = current_pilot.flights.
-        not_ancient.
-        order(date: :asc, created_at: :asc).
-        limit(50) #TODO pagination
+    @flights   = current_pilot.flights.
+      not_ancient.
+      order(date: :asc, created_at: :asc).
+      limit(50) #TODO pagination
     pax_counts = @flights.reorder('').joins(:passengers).group(:flight_id).count
-    @flights = @flights.to_a
+    @flights   = @flights.to_a
 
     @flights.each do |flight|
       flight.passenger_count = pax_counts[flight.id] || 0
@@ -52,7 +53,7 @@ class FlightsController < ApplicationController
   def show
     @passenger = @flight.passengers.build
     respond_to do |format|
-      format.html { render(pilot_signed_in? ? 'edit' : 'show') }
+      format.html { render(render_edit_page? ? 'edit' : 'show') }
     end
   end
 
@@ -141,12 +142,16 @@ class FlightsController < ApplicationController
 
   private
 
-  def find_flight
-    @flight = if pilot_signed_in?
-                current_pilot.flights.find_by_uuid!(params[:id])
-              else
-                Flight.find_by_uuid!(params[:id])
-              end
+  def find_any_flight
+    @flight = Flight.find_by_uuid!(params[:id])
+  end
+
+  def find_my_flight
+    @flight = current_pilot.flights.find_by_uuid!(params[:id])
+  end
+
+  def render_edit_page?
+    pilot_signed_in? && @flight.pilot_id == current_pilot.id
   end
 
   def flight_params

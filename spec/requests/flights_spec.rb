@@ -34,7 +34,14 @@ RSpec.describe 'Flights', type: :request do
       expect(assigns(:flight)).to eql(flight)
     end
 
-    it "renders the 'edit' action if signed in" do
+    it "renders the 'show' action if signed in as a different pilot" do
+      sign_in FactoryBot.create(:pilot)
+      get url
+      expect(response).to render_template('show')
+      expect(assigns(:flight)).to eql(flight)
+    end
+
+    it "renders the 'edit' action if signed in as the creating pilot" do
       sign_in pilot
       get url
       expect(response).to render_template('edit')
