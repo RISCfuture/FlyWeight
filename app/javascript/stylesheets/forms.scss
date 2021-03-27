@@ -40,10 +40,7 @@ textarea {
   outline: none;
 
   padding: 5px 10px;
-
-  &:focus {
-    //TODO
-  }
+  transform: skewX(-10deg); //TODO unskew text
 }
 
 input[type=checkbox] + label {
@@ -57,7 +54,7 @@ input[type=button] {
   @include vars.slant;
   appearance: none;
   background: vars.$gradient-1, colors.$resolution-blue;
-  background-size: 200px 50px;
+  background-size: 200px 50px; //TODO doesn't quite line up with length of gradient
   border: 0;
   color: white;
 
