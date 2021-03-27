@@ -35,10 +35,10 @@ class Passenger < ApplicationRecord
             length:   {maximum: 100}
   validates :weight,
             presence:     true,
-            numericality: {only_integer: true, greater_than: 0}
+            numericality: {only_integer: true, greater_than: 0, less_than: 2000}
   validates :bags_weight,
             presence:     true,
-            numericality: {only_integer: true, greater_than_or_equal_to: 0}
+            numericality: {only_integer: true, greater_than_or_equal_to: 0, less_than: 2000}
 
   broadcasts_to ->(pax) { [pax.flight, :passengers] }
   broadcasts
