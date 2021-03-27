@@ -17,14 +17,13 @@ you can install those dependencies with `brew install`.) After cloning the
 repository, run `bundle install` to install all gem requirements. Run
 `rails db:create db:migrate` to create the development database.
 
-Run the development server with `Procfile -f Procfile.dev`. (You must have the
-`foreman` gem installed). Note that running `rails server` alone will result in
-front-end bugs for some reason; running the Procfile (which spins up separate
-Rails and Webpack dev server processes) is bug-free.
+Run the development server with `Procfile`. (You must have the `foreman` gem
+installed). Note that running `rails server` alone will result in front-end bugs
+for some reason; running the Procfile (which spins up separate Rails and Webpack
+dev server processes) is bug-free.
 
 Turbo requires Active Job workers to be running, as well as the WebSockets
-server. The `Procfile` handles this for Heroku, and the `Procfile.dev` file
-handles this for the development server.
+server. The `Procfile` handles this for the development server.
 
 #### Documentation
 
