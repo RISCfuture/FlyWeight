@@ -9,5 +9,9 @@
       = f.label :weight
       = f.number_field :weight, placeholder: Flight.human_attribute_name(:weight), required: true, min: 1, step: 1
 
+    fieldset
+      = f.label :bags_weight
+      = f.number_field :bags_weight, value: '', placeholder: Flight.human_attribute_name(:bags_weight), min: 0, step: 1
+
     fieldset.actions
       = f.submit data: {action: 'click->passengers#submit' }

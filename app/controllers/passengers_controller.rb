@@ -98,7 +98,7 @@ class PassengersController < ApplicationController
   end
 
   def passenger_params
-    params.require(:passenger).permit :name, :weight
+    params.require(:passenger).permit :name, :weight, :bags_weight
   end
 
   def respond_to_save

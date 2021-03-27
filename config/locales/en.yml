@@ -48,7 +48,11 @@ en:
         Your weight will not be shared with anyone except the pilot. It will be
         available to the pilot only until one week after the flight.
       title: Are you going on a flight with %{name} on %{date}?
-      form: My name is | [name] || and I weigh | [weight] | pounds. || [submit]
+      form: >-
+        My name is | [name]
+        || and I weigh | [weight] | pounds (with clothes on).
+        || My bags weigh around | [bags_weight] | pounds.
+        || [submit]
     new:
       title: Create Flight
   passengers:
@@ -96,3 +100,7 @@ en:
       on_or_before: must be on or before %{restriction}.
       after: must be after %{restriction}.
       on_or_after: must be on or after %{restriction}.
+  models:
+    attributes:
+      passenger:
+        bags_weight: Baggage weight

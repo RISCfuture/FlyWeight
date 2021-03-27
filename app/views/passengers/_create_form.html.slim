@@ -4,11 +4,15 @@
       - if fragment == '[name]'
         fieldset
           = f.label :name
-          = f.text_field :name, placeholder: Flight.human_attribute_name(:name), required: true
+          = f.text_field :name, required: true
       - elsif fragment == '[weight]'
         fieldset
           = f.label :weight
-          = f.number_field :weight, placeholder: Flight.human_attribute_name(:weight), required: true, min: 1, step: 1
+          = f.number_field :weight, required: true, min: 1, step: 1
+      - elsif fragment == '[bags_weight]'
+        fieldset
+          = f.label :bags_weight
+          = f.number_field :bags_weight, min: 0, step: 1
       - elsif fragment == '[submit]'
         fieldset.actions
           = f.submit t('helpers.submit.passenger.create_self'), data: {action: 'click->passengers#submit' }

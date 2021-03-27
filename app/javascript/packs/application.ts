@@ -4,3 +4,5 @@ import 'controllers/index.ts'
 
 import 'flatpickr/dist/themes/material_blue.css'
 import 'stylesheets/application.scss'
+
+require.context('../images', true)

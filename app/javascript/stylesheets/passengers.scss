@@ -21,6 +21,11 @@
   .weight {
     font-size: 14pt;
     font-weight: 200;
+    margin-right: 0.5em;
+  }
+
+  img {
+    margin-right: 0.1em;
   }
 
   .delete {
@@ -43,9 +48,9 @@
   }
 }
 
-// reduce the size of the weight input
-#passenger_weight {
-  width: 100px;
+// reduce the size of the weight inputs
+#passenger_weight, #passenger_bags_weight {
+  width: 120px;
 }
 
 // increase spacing between sections on flights/edit

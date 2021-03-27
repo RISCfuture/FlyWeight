@@ -66,10 +66,10 @@ class Flight < ApplicationRecord
   # @private
   attr_writer :passenger_count
 
-  # @return [Integer] The sum of all passenger weights.
+  # @return [Integer] The sum of all passenger and baggage weights.
 
   def total_weight
-    passengers.sum(:weight)
+    passengers.sum(:weight) + passengers.sum(:bags_weight)
   end
 
   private

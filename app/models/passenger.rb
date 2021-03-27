@@ -14,10 +14,11 @@
 # Properties
 # ----------
 #
-# |          |                                    |
-# |:---------|:-----------------------------------|
-# | `name`   | The passenger's name.              |
-# | `weight` | The passenger's weight, in pounds. |
+# |               |                                                              |
+# |:--------------|:-------------------------------------------------------------|
+# | `name`        | The passenger's name.                                        |
+# | `weight`      | The passenger's weight (including clothes), in pounds.       |
+# | `bags_weight` | The weight of any bags the passenger is bringing, in pounds. |
 #
 # @todo When a new passenger is created and the passenger list HTML is pushed
 #   out to WebSockets via Turbo Stream, the delete button has an invalid form
@@ -35,6 +36,9 @@ class Passenger < ApplicationRecord
   validates :weight,
             presence:     true,
             numericality: {only_integer: true, greater_than: 0}
+  validates :bags_weight,
+            presence:     true,
+            numericality: {only_integer: true, greater_than_or_equal_to: 0}
 
   broadcasts_to ->(pax) { [pax.flight, :passengers] }
   broadcasts
