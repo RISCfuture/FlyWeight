@@ -39,6 +39,15 @@ RSpec.describe 'Passengers', type: :request do
         expect(response).to render_template('flights/show')
         expect(assigns(:passenger).errors.size).to be(1)
       end
+
+      it "updates an existing passenger with the same name" do
+        pax = FactoryBot.create(:passenger, name: "Sancho Sample", weight: 120)
+        pax_params[:name] = "Sancho Sample"
+        post url, params: {passenger: pax_params}
+        expect(response).to redirect_to(flight_passenger_url(flight, flight.passengers.first))
+        expect(flight.passengers.count).to be(1)
+        expect(pax.reload.weight).to be(120)
+      end
     end
 
     context '[logged in as someone else]' do

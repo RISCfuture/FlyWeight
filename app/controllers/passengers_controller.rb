@@ -34,7 +34,8 @@ class PassengersController < ApplicationController
     end
   end
 
-  # Creates a passenger from the given parameters.
+  # Creates a passenger from the given parameters. If the passenger name matches
+  # one that's already in the flight, that passenger is updated.
   #
   # Routes
   # ------
@@ -56,7 +57,9 @@ class PassengersController < ApplicationController
   # | `passenger` | The attributes for the new Passenger. |
 
   def create
-    @passenger = @flight.passengers.create(passenger_params)
+    @passenger = @flight.passengers.find_or_initialize_by(name: passenger_params[:name])
+    @passenger.attributes = passenger_params
+    @passenger.save
     respond_to_save
   end
 

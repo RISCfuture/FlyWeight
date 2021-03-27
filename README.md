@@ -74,6 +74,10 @@ are the same.
 (This means currently that pilots cannot view flights belonging to other pilots;
 they will have to open an Incognito window first.)
 
+Passengers do not need to authenticate. They are provided with an unguessable
+URL where they can add themselves to a flight. When a passenger re-enters their
+information, any record with a matching passenger `name` is updated.
+
 ### Controllers
 
 Controllers serve exclusively HTML-over-the-wire but are still organized in a
