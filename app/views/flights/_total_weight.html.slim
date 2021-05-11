@@ -1,3 +1,10 @@
 = turbo_frame_tag 'total-weight' do
   .name= t 'flights.edit.total_weight'
-  .weight= pluralize flight.total_weight, t('common.pound')
+  .weight
+    = pluralize flight.total_weight, t('common.pound')
+    - unless flight.passenger_count.zero?
+      = ' '
+      small
+        = t 'flights.edit.average', \
+          average_pax_weight: pluralize(flight.average_passenger_weight.round, t('common.pound')), \
+          bags_weight: pluralize(flight.total_bags_weight, t('common.pound'))

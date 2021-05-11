@@ -56,8 +56,8 @@ class Flight < ApplicationRecord
   def to_param() uuid end
 
   # @return [Integer] The number of passengers associated with this flight. This
-  # value is loaded from the database automatically, but can also be pre-set
-  # using `#passenger_count=` for bulk loads.
+  #   value is loaded from the database automatically, but can also be pre-set
+  #   using `#passenger_count=` for bulk loads.
 
   def passenger_count
     @passenger_count ||= passengers.count
@@ -69,7 +69,25 @@ class Flight < ApplicationRecord
   # @return [Integer] The sum of all passenger and baggage weights.
 
   def total_weight
-    passengers.sum(:weight) + passengers.sum(:bags_weight)
+    total_passengers_weight + total_bags_weight
+  end
+
+  # @return [Float] The mean weight of all passengers.
+
+  def average_passenger_weight
+    total_passengers_weight/passenger_count.to_f
+  end
+
+  # @return [Integer] The sum of all passenger weights.
+
+  def total_passengers_weight
+    passengers.sum(:weight)
+  end
+
+  # @return [Integer] The sum of all baggage weights.
+
+  def total_bags_weight
+    passengers.sum(:bags_weight)
   end
 
   private

@@ -30,6 +30,7 @@ en:
       title: Flight on %{date}
       no_passengers: No passengers yet.
       total_weight: Total
+      average: "(%{average_pax_weight} avg. passenger, %{bags_weight} total bags)"
       share: >-
         Share a link to this page with your passengers so they can privately add
         their weights. They will not be able to see anyone else’s weight, only
