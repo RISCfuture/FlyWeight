@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.0.0'
+ruby '3.0.1'
 
 # FRAMEWORK
 gem 'bootsnap', require: false
@@ -13,7 +13,7 @@ gem 'devise'
 
 # MODELS
 gem 'kaminari'
-gem 'validates_timeliness', github: 'tagliala/validates_timeliness', branch: 'rails-61'
+gem 'validates_timeliness', '6.0.0.alpha1'
 
 # CONTROLLERS
 gem 'responders'
