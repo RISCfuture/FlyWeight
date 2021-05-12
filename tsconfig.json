@@ -12,8 +12,7 @@
     },
     "sourceMap": true,
     "target": "es5",
-    "noEmit": true,
-    "types": ["node", "webpack-env"]
+    "noEmit": true
   },
   "exclude": [
     "**/*.spec.ts",
