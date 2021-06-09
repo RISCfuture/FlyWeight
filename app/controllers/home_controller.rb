@@ -26,10 +26,10 @@ class HomeController < ApplicationController
   end
 
   # @private
-  def resource_class() Pilot end
+  def resource_class = Pilot
 
   # @private
-  def resource_name() :pilot end
+  def resource_name = :pilot
 
   private
 

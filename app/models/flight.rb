@@ -53,7 +53,7 @@ class Flight < ApplicationRecord
   scope :not_ancient, -> { where(arel_table[:date].gteq(1.week.ago)) }
 
   # @private
-  def to_param() uuid end
+  def to_param = uuid
 
   # @return [Integer] The number of passengers associated with this flight. This
   #   value is loaded from the database automatically, but can also be pre-set

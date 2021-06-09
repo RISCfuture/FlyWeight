@@ -16,9 +16,9 @@ class FlightsController < ApplicationController
 
   def index
     @flights   = current_pilot.flights.
-      not_ancient.
-      order(date: :asc, created_at: :asc).
-      limit(50) #TODO pagination
+        not_ancient.
+        order(date: :asc, created_at: :asc).
+        limit(50) #TODO pagination
     pax_counts = @flights.reorder('').joins(:passengers).group(:flight_id).count
     @flights   = @flights.to_a
 
