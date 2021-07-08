@@ -7,7 +7,7 @@ require "active_job/railtie"
 require "active_record/railtie"
 # require "active_storage/engine"
 require "action_controller/railtie"
-# require "action_mailer/railtie"
+require "action_mailer/railtie"
 # require "action_mailbox/engine"
 # require "action_text/engine"
 require "action_view/railtie"
@@ -42,8 +42,8 @@ module FlyWeight
     config.x.urls = config_for(:urls)
 
     # reduce the proliferation of job queues
-    # config.action_mailer.default_url_options      = config_for(:urls).slice(:host, :port)
-    # config.action_mailer.deliver_later_queue_name = nil # defaults to "mailers"
+    config.action_mailer.default_url_options      = config_for(:urls).slice(:host, :port)
+    config.action_mailer.deliver_later_queue_name = nil # defaults to "mailers"
     config.active_record.queues.destroy = nil # defaults to "destroy"
   end
 end
