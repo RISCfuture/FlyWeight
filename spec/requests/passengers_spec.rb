@@ -41,6 +41,13 @@ RSpec.describe 'Passengers', type: :request do
         expect(flight.passengers.count).to be(1)
       end
 
+      it "adds a passenger without bags" do
+        post url, params: {passenger: pax_params.merge(bags_weight: '')}
+        expect(response).to redirect_to(flight_passenger_url(flight, flight.passengers.first))
+        expect(flight.passengers.count).to be(1)
+        expect(flight.passengers.first.bags_weight).to be_zero
+      end
+
       it "handles validation errors" do
         pax_params[:weight] = 'not a number'
         post url, params: {passenger: pax_params}
@@ -67,6 +74,13 @@ RSpec.describe 'Passengers', type: :request do
         expect(flight.passengers.count).to be(1)
       end
 
+      it "adds a passenger without bags" do
+        post url, params: {passenger: pax_params.merge(bags_weight: '')}
+        expect(response).to redirect_to(flight_passenger_url(flight, flight.passengers.first))
+        expect(flight.passengers.count).to be(1)
+        expect(flight.passengers.first.bags_weight).to be_zero
+      end
+
       it "handles validation errors" do
         pax_params[:weight] = 'not a number'
         post url, params: {passenger: pax_params}
@@ -91,6 +105,13 @@ RSpec.describe 'Passengers', type: :request do
         post url, params: {passenger: pax_params}
         expect(response).to redirect_to(flight_url(flight))
         expect(flight.passengers.count).to be(1)
+      end
+
+      it "adds a passenger without bags" do
+        post url, params: {passenger: pax_params.merge(bags_weight: '')}
+        expect(response).to redirect_to(flight_url(flight))
+        expect(flight.passengers.count).to be(1)
+        expect(flight.passengers.first.bags_weight).to be_zero
       end
 
       it "handles validation errors" do

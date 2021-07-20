@@ -106,7 +106,9 @@ class PassengersController < ApplicationController
   end
 
   def passenger_params
-    params.require(:passenger).permit :name, :weight, :bags_weight
+    pax_params = params.require(:passenger).permit(:name, :weight, :bags_weight)
+    pax_params['bags_weight'] = '0' if pax_params['bags_weight'].blank?
+    return pax_params
   end
 
   def respond_to_save
