@@ -12,6 +12,8 @@ export default class FlightsController extends BaseController {
 
   declare dateTarget: HTMLElement
 
+  declare hasDateTarget: boolean
+
   picker!: flatpickr.Instance
 
   /** @private */
@@ -19,16 +21,18 @@ export default class FlightsController extends BaseController {
     super.connect()
 
     let date: Date
-    if (this.dateTarget.hasAttribute('value')) date = parseISO(this.dateTarget.getAttribute('value'))
-    else date = new Date()
+    if (this.hasDateTarget) {
+      if (this.dateTarget.hasAttribute('value')) date = parseISO(this.dateTarget.getAttribute('value'))
+      else date = new Date()
 
-    this.picker = flatpickr(this.dateTarget, {
-      altInput: true,
-      closeOnSelect: true,
-      defaultDate: date,
-      // minDate: new Date(),
-      nextArrow: '&raquo;',
-      prevArrow: '&laquo;'
-    })
+      this.picker = flatpickr(this.dateTarget, {
+        altInput: true,
+        closeOnSelect: true,
+        defaultDate: date,
+        // minDate: new Date(),
+        nextArrow: '&raquo;',
+        prevArrow: '&laquo;'
+      })
+    }
   }
 }
