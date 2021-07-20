@@ -54,6 +54,15 @@ class ApplicationController < ActionController::Base
 
   respond_to :html, :turbo_stream
 
+  protected
+
+  # @return [true, false] Whether or not a pilot is logged in and viewing a
+  #   flight that they created.
+
+  def my_flight?
+    pilot_signed_in? && @flight.pilot_id == current_pilot.id
+  end
+
   private
 
   def add_user_info_to_bugsnag(report)

@@ -53,7 +53,7 @@ class FlightsController < ApplicationController
   def show
     @passenger = @flight.passengers.build
     respond_to do |format|
-      format.html { render(render_edit_page? ? 'edit' : 'show') }
+      format.html { render(my_flight? ? 'edit' : 'show') }
     end
   end
 
@@ -148,10 +148,6 @@ class FlightsController < ApplicationController
 
   def find_my_flight
     @flight = current_pilot.flights.find_by_uuid!(params[:id])
-  end
-
-  def render_edit_page?
-    pilot_signed_in? && @flight.pilot_id == current_pilot.id
   end
 
   def flight_params

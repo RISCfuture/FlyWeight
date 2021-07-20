@@ -3,9 +3,10 @@
 # unauthenticated sessions.
 
 class PassengersController < ApplicationController
-  before_action :find_flight
-  before_action :find_passenger, only: %i[destroy show]
   before_action :authenticate_pilot!, except: %i[create show]
+  before_action :find_any_flight, only: %i[create show]
+  before_action :find_my_flight, except: %i[create show]
+  before_action :find_passenger, only: %i[destroy show]
 
   # Displays a page thanking a passenger for sharing their weight. This page is
   # shown after an unauthenticated session finishes a passenger-create
@@ -27,7 +28,7 @@ class PassengersController < ApplicationController
   # | `id`        | The ID of a Passenger. |
 
   def show
-    return redirect_to(@flight) if pilot_signed_in?
+    return redirect_to(@flight) if my_flight?
 
     respond_to do |format|
       format.html
@@ -88,12 +89,16 @@ class PassengersController < ApplicationController
 
   private
 
-  def find_flight
-    @flight = if pilot_signed_in?
-                current_pilot.flights.find_by_uuid!(params[:flight_id])
-              else
-                Flight.find_by_uuid!(params[:flight_id])
-              end
+  def find_any_flight
+    @flight = Flight.find_by_uuid!(params[:flight_id])
+  end
+
+  def find_my_flight
+    if pilot_signed_in?
+      @flight = current_pilot.flights.find_by_uuid!(params[:flight_id])
+    else
+      raise ActiveRecord::RecordNotFound
+    end
   end
 
   def find_passenger
@@ -108,26 +113,26 @@ class PassengersController < ApplicationController
     respond_to do |format|
       format.turbo_stream do
         if @passenger.valid?
-          if pilot_signed_in?
-            redirect_to @flight, status: :see_other
-          else
-            redirect_to flight_passenger_url(@flight, @passenger), status: :see_other
-          end
+          redirect_to after_save_destination, status: :see_other
         else
           render status: :unprocessable_entity
         end
       end
       format.html do
         if @flight.valid?
-          if pilot_signed_in?
-            redirect_to @flight
-          else
-            redirect_to flight_passenger_url(@flight, @passenger)
-          end
+          redirect_to after_save_destination
         else
-          render(pilot_signed_in? ? 'flights/edit' : 'flights/show')
+          render validation_failure_template
         end
       end
     end
+  end
+
+  def validation_failure_template
+    my_flight? ? 'flights/edit' : 'flights/show'
+  end
+
+  def after_save_destination
+    my_flight? ? @flight : flight_passenger_url(@flight, @passenger)
   end
 end

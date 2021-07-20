@@ -1,5 +1,5 @@
 = turbo_stream.replace 'new-passenger-frame' do
-  - if pilot_logged_in?
+  - if pilot_signed_in?
     = render partial: 'passengers/form', locals: {flight: @flight, passenger: @passenger}
   - else
     = render partial: 'passengers/create_form', locals: {flight: @flight, passenger: @passenger}

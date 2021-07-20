@@ -20,6 +20,14 @@ RSpec.describe 'Passengers', type: :request do
       get url
       expect(response).to redirect_to(flight_url(flight))
     end
+
+    it "renders the 'show' action if signed in as someone else" do
+      sign_in FactoryBot.create(:pilot)
+      get url
+      expect(response).to have_http_status(:success)
+      expect(assigns(:flight)).to eql(flight)
+      expect(assigns(:passenger)).to eql(passenger)
+    end
   end
 
   describe 'POST /flights/:flight_id/passengers' do
@@ -53,9 +61,26 @@ RSpec.describe 'Passengers', type: :request do
     context '[logged in as someone else]' do
       before(:each) { sign_in FactoryBot.create(:pilot) }
 
-      it "renders a 404" do
+      it "adds a passenger" do
         post url, params: {passenger: pax_params}
-        expect(response).to have_http_status(:not_found)
+        expect(response).to redirect_to(flight_passenger_url(flight, flight.passengers.first))
+        expect(flight.passengers.count).to be(1)
+      end
+
+      it "handles validation errors" do
+        pax_params[:weight] = 'not a number'
+        post url, params: {passenger: pax_params}
+        expect(response).to render_template('flights/show')
+        expect(assigns(:passenger).errors.size).to be(1)
+      end
+
+      it "updates an existing passenger with the same name" do
+        pax = FactoryBot.create(:passenger, name: "Sancho Sample", weight: 120)
+        pax_params[:name] = "Sancho Sample"
+        post url, params: {passenger: pax_params}
+        expect(response).to redirect_to(flight_passenger_url(flight, flight.passengers.first))
+        expect(flight.passengers.count).to be(1)
+        expect(pax.reload.weight).to be(120)
       end
     end
 
