@@ -68,8 +68,9 @@ en:
         add their own.
       owner: "Here’s what you can see that they can’t:"
       header:
-        passengers: Passengers
+        add_passenger: Add Passenger
         edit: Edit Flight
+        passengers: Passengers
       delete: Delete Flight
     show:
       explanation: >-
@@ -84,6 +85,8 @@ en:
         My name is | [name]
         || and I weigh | [weight] | pounds (with clothes on).
         || My bags weigh around | [bags_weight] | pounds.
+        || [covid19_vaccine]
+        || [covid19_test_negative]
         || [submit]
     new:
       title: Create Flight
@@ -92,6 +95,10 @@ en:
       title: Thanks, %{name}!
       body: "%{name} has your weight info. See you in the skies!"
   helpers:
+    label:
+      passenger:
+        covid19_vaccine: COVID 19 vaccination
+        covid19_test_negative: Negative COVID 19 test
     submit:
       pilot:
         create: Sign Up

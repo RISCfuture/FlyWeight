@@ -24,6 +24,13 @@
     margin-right: 0.5em;
   }
 
+  .icon {
+    img {
+      height: 16px;
+      width: 16px;
+    }
+  }
+
   img {
     margin-right: 0.1em;
   }
@@ -49,7 +56,8 @@
 }
 
 // reduce the size of the weight inputs
-#passenger_weight, #passenger_bags_weight {
+#passenger_weight,
+#passenger_bags_weight {
   width: 120px;
 }
 

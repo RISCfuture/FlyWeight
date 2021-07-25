@@ -13,5 +13,17 @@
       = f.label :bags_weight
       = f.number_field :bags_weight, value: '', placeholder: Flight.human_attribute_name(:bags_weight), min: 0, step: 1
 
+    fieldset.flex-break-h
+
+    fieldset= f.label :covid19_vaccine, class: 'checkbox-label' do |label|
+      = f.check_box :covid19_vaccine
+      = label
+
+    fieldset= f.label :covid19_test_negative, class: 'checkbox-label' do |label|
+      = f.check_box :covid19_test_negative
+      = label
+
+    fieldset.flex-break-h
+
     fieldset.actions
       = f.submit data: {action: 'click->passengers#submit' }

@@ -13,6 +13,14 @@
         fieldset
           = f.label :bags_weight
           = f.number_field :bags_weight, min: 0, step: 1
+      - elsif fragment == '[covid19_vaccine]'
+        fieldset= f.label :covid19_vaccine, class: 'checkbox-label' do |label|
+          = f.check_box :covid19_vaccine
+          = label
+      - elsif fragment == '[covid19_test_negative]'
+        fieldset= f.label :covid19_test_negative, class: 'checkbox-label' do |label|
+          = f.check_box :covid19_test_negative
+          = label
       - elsif fragment == '[submit]'
         fieldset.actions
           = f.submit t('helpers.submit.passenger.create_self'), data: {action: 'click->passengers#submit' }

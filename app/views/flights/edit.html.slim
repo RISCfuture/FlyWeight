@@ -17,6 +17,7 @@ hr
 
 = render partial: 'flights/total_weight', locals: {flight: @flight}
 
+h2= t 'flights.edit.header.add_passenger'
 = render partial: 'passengers/form', locals: {flight: @flight, passenger: @passenger}
 
 h2= t 'flights.edit.header.edit'
