@@ -11,9 +11,9 @@
       = f.label :password
       = f.password_field :password, autocomplete: 'current-password', required: true
 
-    fieldset
+    fieldset= f.label :remember_me, class: 'checkbox-label' do |label|
       = f.check_box :remember_me
-      = f.label :remember_me
+      = label
 
     fieldset.actions
       = f.submit t('helpers.submit.pilot.login'), data: {action: 'click->home#submit' }
