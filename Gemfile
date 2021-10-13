@@ -43,7 +43,6 @@ group :development do
 
   # DEPLOY
   gem 'capistrano-bundler', require: false
-  gem 'capistrano-passenger', require: false
   gem 'capistrano-rails', require: false
   gem 'capistrano-rvm', require: false
   gem 'capistrano-sidekiq', require: false

@@ -1,16 +1,12 @@
 development:
   host: "localhost:5000"
   https: false
-  frontend: "http://localhost:5100"
 test:
   host: test.host
   https: false
-  frontend: "http://frontend.test.host"
 cypress:
   host: "localhost:5000"
   https: false
-  frontend: "http://localhost:5100"
 production:
-  host: flyweight.herokuapp.com
+  host: flyweight.org
   https: true
-  frontend: "https://sentient-cargo.github.io"
