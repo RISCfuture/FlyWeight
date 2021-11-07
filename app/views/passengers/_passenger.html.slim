@@ -11,6 +11,8 @@
         = pluralize passenger.bags_weight, t('common.pound')
     - if passenger.covid19_vaccine?
       .icon= image_pack_tag 'vaccine.svg'
+    - if passenger.covid19_vaccine_booster?
+      .icon= image_pack_tag 'booster.svg'
     - if passenger.covid19_test_negative?
       .icon= image_pack_tag 'test.svg'
     .delete

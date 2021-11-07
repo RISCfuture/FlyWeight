@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_25_205747) do
+ActiveRecord::Schema.define(version: 2021_12_15_054520) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 2021_07_25_205747) do
     t.integer "bags_weight", default: 0, null: false
     t.boolean "covid19_vaccine", default: false, null: false
     t.boolean "covid19_test_negative", default: false, null: false
+    t.boolean "covid19_vaccine_booster", default: false, null: false
     t.index ["flight_id"], name: "index_passengers_on_flight_id"
   end
 

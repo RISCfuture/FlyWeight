@@ -7,5 +7,6 @@ FactoryBot.define do
     bags_weight { FFaker::Boolean.maybe ? rand(5...50) : 0 }
     covid19_vaccine { FFaker::Boolean.maybe }
     covid19_test_negative { FFaker::Boolean.maybe }
+    covid19_vaccine_booster { FFaker::Boolean.maybe }
   end
 end
