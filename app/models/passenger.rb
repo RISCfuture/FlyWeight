@@ -14,13 +14,14 @@
 # Properties
 # ----------
 #
-# |                         |                                                                  |
-# |:------------------------|:-----------------------------------------------------------------|
-# | `name`                  | The passenger's name.                                            |
-# | `weight`                | The passenger's weight (including clothes), in pounds.           |
-# | `bags_weight`           | The weight of any bags the passenger is bringing, in pounds.     |
-# | `covid19_vaccine`       | `true` if the passenger has an up-to-date COVID 19 vaccination.  |
-# | `covid19_test_negative` | `true` if the passenger has had a recent negative COVID 19 test. |
+# |                           |                                                                  |
+# |:--------------------------|:-----------------------------------------------------------------|
+# | `name`                    | The passenger's name.                                            |
+# | `weight`                  | The passenger's weight (including clothes), in pounds.           |
+# | `bags_weight`             | The weight of any bags the passenger is bringing, in pounds.     |
+# | `covid19_vaccine`         | `true` if the passenger has an up-to-date COVID 19 vaccination.  |
+# | `covid19_test_negative`   | `true` if the passenger has had a recent negative COVID 19 test. |
+# | `covid19_vaccine_booster` | `true` if the passenger has had a COVID 19 booster shot.         |
 #
 # @todo When a new passenger is created and the passenger list HTML is pushed
 #   out to WebSockets via Turbo Stream, the delete button has an invalid form

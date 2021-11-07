@@ -87,6 +87,7 @@ en:
         || My bags weigh around | [bags_weight] | pounds.
         || [covid19_vaccine]
         || [covid19_test_negative]
+        || [covid19_vaccine_booster]
         || [submit]
     new:
       title: Create Flight
@@ -99,6 +100,7 @@ en:
       passenger:
         covid19_vaccine: COVID 19 vaccination
         covid19_test_negative: Negative COVID 19 test
+        covid19_vaccine_booster: COVID 19 vaccination booster shot
     submit:
       pilot:
         create: Sign Up
