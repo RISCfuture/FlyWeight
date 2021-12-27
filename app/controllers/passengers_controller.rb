@@ -71,8 +71,8 @@ class PassengersController < ApplicationController
   #
   # * `DELETE /flights/:flight_id/passengers/:id`
   #
-  # Query Parameters
-  # ----------------
+  # Path Parameters
+  # ---------------
   #
   # |             |                        |
   # |:------------|:-----------------------|
