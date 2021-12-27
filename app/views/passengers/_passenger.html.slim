@@ -15,5 +15,7 @@
       .icon= image_pack_tag 'booster.svg'
     - if passenger.covid19_test_negative?
       .icon= image_pack_tag 'test.svg'
+    - if passenger.covid19_vaccine_booster?
+      .icon= image_pack_tag 'booster.svg'
     .delete
       = button_to "&times;".html_safe, [passenger.flight, passenger], method: :delete, aria: {label: t('helpers.submit.passenger.destroy')}

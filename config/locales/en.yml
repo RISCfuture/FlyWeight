@@ -88,6 +88,7 @@ en:
         || [covid19_vaccine]
         || [covid19_vaccine_booster]
         || [covid19_test_negative]
+        || [covid19_vaccine_booster]
         || [submit]
     new:
       title: Create Flight
