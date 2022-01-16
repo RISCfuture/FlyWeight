@@ -1,11 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe 'Passengers', type: :request do
-  let(:pilot) { FactoryBot.create :pilot }
-  let(:flight) { FactoryBot.create :flight, pilot: pilot }
+  let(:pilot) { create :pilot }
+  let(:flight) { create :flight, pilot: pilot }
 
   describe 'GET /flights/:flight_id/passengers/:id' do
-    let(:passenger) { FactoryBot.create :passenger, flight: flight }
+    let(:passenger) { create :passenger, flight: flight }
     let(:url) { flight_passenger_url(flight, passenger) }
 
     it "renders the 'show' action if not signed in" do
@@ -22,7 +22,7 @@ RSpec.describe 'Passengers', type: :request do
     end
 
     it "renders the 'show' action if signed in as someone else" do
-      sign_in FactoryBot.create(:pilot)
+      sign_in create(:pilot)
       get url
       expect(response).to have_http_status(:success)
       expect(assigns(:flight)).to eql(flight)
@@ -31,7 +31,7 @@ RSpec.describe 'Passengers', type: :request do
   end
 
   describe 'POST /flights/:flight_id/passengers' do
-    let(:pax_params) { FactoryBot.attributes_for :passenger }
+    let(:pax_params) { attributes_for :passenger }
     let(:url) { flight_passengers_url(flight) }
 
     context '[logged out]' do
@@ -56,7 +56,7 @@ RSpec.describe 'Passengers', type: :request do
       end
 
       it "updates an existing passenger with the same name" do
-        pax = FactoryBot.create(:passenger, name: "Sancho Sample", weight: 120)
+        pax = create(:passenger, name: "Sancho Sample", weight: 120)
         pax_params[:name] = "Sancho Sample"
         post url, params: {passenger: pax_params}
         expect(response).to redirect_to(flight_passenger_url(flight, flight.passengers.first))
@@ -66,7 +66,7 @@ RSpec.describe 'Passengers', type: :request do
     end
 
     context '[logged in as someone else]' do
-      before(:each) { sign_in FactoryBot.create(:pilot) }
+      before(:each) { sign_in create(:pilot) }
 
       it "adds a passenger" do
         post url, params: {passenger: pax_params}
@@ -89,7 +89,7 @@ RSpec.describe 'Passengers', type: :request do
       end
 
       it "updates an existing passenger with the same name" do
-        pax = FactoryBot.create(:passenger, name: "Sancho Sample", weight: 120)
+        pax = create(:passenger, name: "Sancho Sample", weight: 120)
         pax_params[:name] = "Sancho Sample"
         post url, params: {passenger: pax_params}
         expect(response).to redirect_to(flight_passenger_url(flight, flight.passengers.first))
@@ -124,7 +124,7 @@ RSpec.describe 'Passengers', type: :request do
   end
 
   describe 'DELETE /flights/:flight_id/passengers/:id' do
-    let(:passenger) { FactoryBot.create :passenger, flight: flight }
+    let(:passenger) { create :passenger, flight: flight }
     let(:url) { flight_passenger_url(flight, passenger) }
 
     it "redirects if not logged in" do
@@ -133,7 +133,7 @@ RSpec.describe 'Passengers', type: :request do
     end
 
     it "404s if logged in as a different pilot" do
-      sign_in FactoryBot.create(:pilot)
+      sign_in create(:pilot)
       delete url
       expect(response).to have_http_status(:not_found)
     end

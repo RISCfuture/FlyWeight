@@ -90,12 +90,12 @@ class PassengersController < ApplicationController
   private
 
   def find_any_flight
-    @flight = Flight.find_by_uuid!(params[:flight_id])
+    @flight = Flight.find_by!(uuid: params[:flight_id])
   end
 
   def find_my_flight
     if pilot_signed_in?
-      @flight = current_pilot.flights.find_by_uuid!(params[:flight_id])
+      @flight = current_pilot.flights.find_by!(uuid: params[:flight_id])
     else
       raise ActiveRecord::RecordNotFound
     end
@@ -106,9 +106,9 @@ class PassengersController < ApplicationController
   end
 
   def passenger_params
-    pax_params = params.require(:passenger)
-                       .permit(:name, :weight, :bags_weight, :covid19_vaccine,
-                               :covid19_test_negative, :covid19_vaccine_booster)
+    pax_params = params.require(:passenger).
+        permit(:name, :weight, :bags_weight, :covid19_vaccine,
+               :covid19_test_negative, :covid19_vaccine_booster)
     pax_params['bags_weight'] = '0' if pax_params['bags_weight'].blank?
     return pax_params
   end

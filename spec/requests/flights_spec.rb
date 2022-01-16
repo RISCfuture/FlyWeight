@@ -1,14 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe 'Flights', type: :request do
-  let(:pilot) { FactoryBot.create :pilot }
+  let(:pilot) { create :pilot }
 
   describe 'GET /flights' do
     before :each do
-      @flights = FactoryBot.create_list(:flight, 10, pilot: pilot)
+      @flights = create_list(:flight, 10, pilot: pilot)
       # red herrings
-      FactoryBot.create :flight
-      FactoryBot.create :flight, pilot: pilot, date: 2.weeks.ago
+      create :flight
+      create :flight, pilot: pilot, date: 2.weeks.ago
     end
 
     it "redirects when not logged in" do
@@ -25,7 +25,7 @@ RSpec.describe 'Flights', type: :request do
   end
 
   describe 'GET /flights/:id' do
-    let(:flight) { FactoryBot.create :flight, pilot: pilot }
+    let(:flight) { create :flight, pilot: pilot }
     let(:url) { flight_url(flight) }
 
     it "renders the 'show' action if not signed in" do
@@ -35,7 +35,7 @@ RSpec.describe 'Flights', type: :request do
     end
 
     it "renders the 'show' action if signed in as a different pilot" do
-      sign_in FactoryBot.create(:pilot)
+      sign_in create(:pilot)
       get url
       expect(response).to render_template('show')
       expect(assigns(:flight)).to eql(flight)
@@ -64,7 +64,7 @@ RSpec.describe 'Flights', type: :request do
   end
 
   describe 'POST /flights' do
-    let(:flight_params) { FactoryBot.attributes_for :flight }
+    let(:flight_params) { attributes_for :flight }
 
     it "redirects if not logged in" do
       post '/flights', params: {flight: flight_params}
@@ -90,8 +90,8 @@ RSpec.describe 'Flights', type: :request do
   end
 
   describe 'PATCH /flights/:id' do
-    let(:flight) { FactoryBot.create :flight, pilot: pilot }
-    let(:flight_params) { FactoryBot.attributes_for :flight }
+    let(:flight) { create :flight, pilot: pilot }
+    let(:flight_params) { attributes_for :flight }
     let(:url) { flight_url(flight) }
 
     it "redirects if not logged in" do
@@ -100,7 +100,7 @@ RSpec.describe 'Flights', type: :request do
     end
 
     it "404s if logged in as a different pilot" do
-      sign_in FactoryBot.create(:pilot)
+      sign_in create(:pilot)
       patch url, params: {flight: flight_params}
       expect(response).to have_http_status(:not_found)
     end
@@ -125,7 +125,7 @@ RSpec.describe 'Flights', type: :request do
   end
 
   describe 'DELETE /flights/:id' do
-    let(:flight) { FactoryBot.create :flight, pilot: pilot }
+    let(:flight) { create :flight, pilot: pilot }
     let(:url) { flight_url(flight) }
 
     it "redirects if not logged in" do
@@ -134,7 +134,7 @@ RSpec.describe 'Flights', type: :request do
     end
 
     it "404s if logged in as a different pilot" do
-      sign_in FactoryBot.create(:pilot)
+      sign_in create(:pilot)
       delete url
       expect(response).to have_http_status(:not_found)
     end

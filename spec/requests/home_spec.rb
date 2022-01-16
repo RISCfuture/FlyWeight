@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Home', type: :request do
   describe 'GET /' do
     it "redirects if logged in" do
-      sign_in FactoryBot.create(:pilot)
+      sign_in create(:pilot)
       get '/'
       expect(response).to redirect_to(flights_url)
     end

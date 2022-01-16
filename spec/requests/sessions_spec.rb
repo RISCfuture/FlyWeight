@@ -10,7 +10,7 @@ RSpec.describe 'Sessions', type: :request do
 
   describe 'POST /pilots/sign_in' do
     let(:password) { 'password123' }
-    let(:pilot) { FactoryBot.create :pilot, password: password }
+    let(:pilot) { create :pilot, password: password }
     let(:params) { {pilot: {email: pilot.email, password: password}} }
 
     it "signs in a pilot" do
