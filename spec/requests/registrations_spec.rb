@@ -9,7 +9,7 @@ RSpec.describe 'Registrations', type: :request do
   end
 
   describe 'POST /pilots' do
-    let(:pilot_params) { FactoryBot.attributes_for :pilot }
+    let(:pilot_params) { attributes_for :pilot }
 
     it "creates a new pilot" do
       post '/pilots', params: {pilot: pilot_params}
@@ -29,9 +29,9 @@ RSpec.describe 'Registrations', type: :request do
   end
 
   describe 'PATCH /pilots' do
-    let(:pilot) { FactoryBot.create :pilot, password: 'supersekret' }
+    let(:pilot) { create :pilot, password: 'supersekret' }
     let(:pilot_params) do
-      FactoryBot.attributes_for(:pilot).merge(current_password: 'supersekret')
+      attributes_for(:pilot).merge(current_password: 'supersekret')
     end
 
     before(:each) { sign_in pilot }

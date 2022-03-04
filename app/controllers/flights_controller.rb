@@ -143,11 +143,11 @@ class FlightsController < ApplicationController
   private
 
   def find_any_flight
-    @flight = Flight.find_by_uuid!(params[:id])
+    @flight = Flight.find_by!(uuid: params[:id])
   end
 
   def find_my_flight
-    @flight = current_pilot.flights.find_by_uuid!(params[:id])
+    @flight = current_pilot.flights.find_by!(uuid: params[:id])
   end
 
   def flight_params

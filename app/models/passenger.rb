@@ -50,23 +50,23 @@ class Passenger < ApplicationRecord
 
   # @private
   def broadcast_action_later_to(*streamables, action: :append, target: broadcast_target_default, **)
-    content = turbo_stream_action_tag(action, target: target, template: stream_content) +
+    content = turbo_stream_action_tag(action, target:, template: stream_content) +
       turbo_stream_action_tag(:replace, target: 'total-weight', template: total_weight_content)
-    Turbo::StreamsChannel.broadcast_stream_to(*streamables, content: content)
+    Turbo::StreamsChannel.broadcast_stream_to(*streamables, content:)
   end
 
   # @private
   def broadcast_replace_later_to(*streamables, **)
     content = turbo_stream_action_tag(:replace, target: self, template: stream_content) +
       turbo_stream_action_tag(:replace, target: 'total-weight', template: total_weight_content)
-    Turbo::StreamsChannel.broadcast_stream_to(*streamables, content: content)
+    Turbo::StreamsChannel.broadcast_stream_to(*streamables, content:)
   end
 
   # @private
   def broadcast_remove_to(*streamables)
     content = turbo_stream_action_tag(:remove, target: self) +
       turbo_stream_action_tag(:replace, target: 'total-weight', template: total_weight_content)
-    Turbo::StreamsChannel.broadcast_stream_to(*streamables, content: content)
+    Turbo::StreamsChannel.broadcast_stream_to(*streamables, content:)
   end
 
   private
@@ -76,6 +76,6 @@ class Passenger < ApplicationRecord
   end
 
   def total_weight_content
-    ApplicationController.render partial: 'flights/total_weight', locals: {flight: flight}
+    ApplicationController.render partial: 'flights/total_weight', locals: {flight:}
   end
 end
