@@ -1,4 +1,5 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-yarn run vue-cli-service lint; git add .
+yarn run eslint app/javascript/**/*.ts --fix
+yarn run stylelint app/javascript/**/*.{css,scss,sass} --fix
