@@ -41,8 +41,8 @@ set :default_env, {path: '/usr/local/nvm/versions/node/v16.13.0/bin:$PATH'}
 
 # Uncomment the following to require manually verifying the host key before first deploy.
 # set :ssh_options, verify_host_key: :secure
-''
-set :rvm_ruby_version, "3.0.3@#{fetch :application}"
+
+set :rvm_ruby_version, "3.1.1@#{fetch :application}"
 set :sidekiq_config, 'config/sidekiq.yml'
 set :bugsnag_api_key, Rails.application.credentials.bugsnag_api_key
 
