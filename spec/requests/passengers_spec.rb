@@ -50,9 +50,10 @@ RSpec.describe 'Passengers', type: :request do
 
       it "handles validation errors" do
         pax_params[:weight] = 'not a number'
+        pax_params[:bags_weight] = 'not a number'
         post url, params: {passenger: pax_params}
         expect(response).to render_template('flights/show')
-        expect(assigns(:passenger).errors.size).to be(1)
+        expect(assigns(:passenger).errors.size).to be(4)
       end
 
       it "updates an existing passenger with the same name" do
@@ -83,9 +84,10 @@ RSpec.describe 'Passengers', type: :request do
 
       it "handles validation errors" do
         pax_params[:weight] = 'not a number'
+        pax_params[:bags_weight] = 'not a number'
         post url, params: {passenger: pax_params}
         expect(response).to render_template('flights/show')
-        expect(assigns(:passenger).errors.size).to be(1)
+        expect(assigns(:passenger).errors.size).to be(4)
       end
 
       it "updates an existing passenger with the same name" do
@@ -116,9 +118,10 @@ RSpec.describe 'Passengers', type: :request do
 
       it "handles validation errors" do
         pax_params[:weight] = 'not a number'
+        pax_params[:bags_weight] = 'not a number'
         post url, params: {passenger: pax_params}
         expect(response).to render_template('flights/edit')
-        expect(assigns(:passenger).errors.size).to be(1)
+        expect(assigns(:passenger).errors.size).to be(4)
       end
     end
   end

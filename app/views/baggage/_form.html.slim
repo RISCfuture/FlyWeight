@@ -1,0 +1,16 @@
+= turbo_frame_tag 'new-baggage-frame' do
+  = render partial: 'home/errors', locals: {resource: baggage}
+  = form_with model: [flight, baggage], class: 'inline' do |f|
+    fieldset
+      = f.label :name
+      = f.text_field :name, placeholder: Flight.human_attribute_name(:description), required: true
+
+    fieldset
+      = f.label :bags_weight
+      = f.number_field :bags_weight, value: '', placeholder: Flight.human_attribute_name(:weight), required: true, min: 1, step: 1
+      = f.hidden_field :weight
+
+    fieldset.flex-break-h
+
+    fieldset.actions
+      = f.submit t('helpers.submit.baggage.create'), data: {action: 'click->passengers#submit' }

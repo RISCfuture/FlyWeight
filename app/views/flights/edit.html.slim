@@ -11,7 +11,7 @@ h2= t 'flights.edit.header.passengers'
   - if @flight.passenger_count.zero?
     p.empty= t('flights.edit.no_passengers')
   - else
-    = render @flight.passengers.to_a.select(&:persisted?)
+    = render @flight.loads.to_a.select(&:persisted?)
 
 hr
 
@@ -19,6 +19,10 @@ hr
 
 h2= t 'flights.edit.header.add_passenger'
 = render partial: 'passengers/form', locals: {flight: @flight, passenger: @passenger}
+
+h2= t 'flights.edit.header.add_baggage'
+= render partial: 'baggage/form', locals: {flight: @flight, baggage: @baggage}
+
 
 h2= t 'flights.edit.header.edit'
 = render partial: 'flights/form', locals: {flight: @flight}
