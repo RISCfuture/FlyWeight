@@ -7,6 +7,7 @@ ruby '3.1.1'
 gem 'bootsnap', require: false
 gem 'rack-cors'
 gem 'rails'
+gem 'net-smtp', require: false
 
 # AUTH
 gem 'devise'

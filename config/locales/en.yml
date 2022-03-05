@@ -68,6 +68,7 @@ en:
         add their own.
       owner: "Here’s what you can see that they can’t:"
       header:
+        add_baggage: Add Baggage
         add_passenger: Add Passenger
         edit: Edit Flight
         passengers: Passengers
@@ -102,6 +103,9 @@ en:
         covid19_test_negative: Negative COVID 19 test
         covid19_vaccine_booster: COVID 19 vaccination booster shot
     submit:
+      baggage:
+        create: Add Baggage
+        destroy: Delete Baggage
       pilot:
         create: Sign Up
         login: Log In
@@ -145,3 +149,4 @@ en:
     attributes:
       passenger:
         bags_weight: Baggage weight
+        description: Description

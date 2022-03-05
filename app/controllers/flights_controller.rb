@@ -52,6 +52,8 @@ class FlightsController < ApplicationController
 
   def show
     @passenger = @flight.passengers.build
+    @baggage = @flight.baggage.build(weight: 0)
+
     respond_to do |format|
       format.html { render(my_flight? ? 'edit' : 'show') }
     end
@@ -161,6 +163,7 @@ class FlightsController < ApplicationController
           redirect_to @flight, status: :see_other
         else
           @passenger = @flight.passengers.build
+          @baggage = @flight.baggage.build(weight: 0)
           render status: :unprocessable_entity
         end
       end
@@ -169,6 +172,7 @@ class FlightsController < ApplicationController
           redirect_to @flight
         else
           @passenger = @flight.passengers.build
+          @baggage = @flight.baggage.build(weight: 0)
           render(@flight.persisted? ? 'flights/edit' : 'flights/new')
         end
       end

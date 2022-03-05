@@ -61,6 +61,7 @@ class PassengersController < ApplicationController
     @passenger = @flight.passengers.find_or_initialize_by(name: passenger_params[:name])
     @passenger.attributes = passenger_params
     @passenger.save
+    @baggage = @passenger
     respond_to_save
   end
 
@@ -102,7 +103,7 @@ class PassengersController < ApplicationController
   end
 
   def find_passenger
-    @passenger = @flight.passengers.find(params[:id])
+    @passenger = @flight.loads.find(params[:id])
   end
 
   def passenger_params
