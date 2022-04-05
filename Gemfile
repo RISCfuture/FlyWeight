@@ -5,9 +5,11 @@ ruby '3.1.1'
 
 # FRAMEWORK
 gem 'bootsnap', require: false
+gem 'net-imap', require: false
+gem 'net-pop', require: false
+gem 'net-smtp', require: false
 gem 'rack-cors'
 gem 'rails'
-gem 'net-smtp', require: false
 
 # AUTH
 gem 'devise'

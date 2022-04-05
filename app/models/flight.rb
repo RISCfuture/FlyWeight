@@ -32,9 +32,11 @@ class Flight < ApplicationRecord
   include Turbo::Broadcastable
 
   belongs_to :pilot
-  has_many :loads, class_name: 'Passenger', foreign_key: 'flight_id', dependent: :delete_all
+  has_many :loads, class_name: 'Passenger', dependent: :delete_all
+  # rubocop:disable Rails/HasManyOrHasOneDependent,Rails/InverseOf
   has_many :passengers, -> { passengers }
   has_many :baggage, -> { baggage }, class_name: 'Passenger', foreign_key: 'flight_id'
+  # rubocop:enable Rails/HasManyOrHasOneDependent,Rails/InverseOf
 
   validates :description,
             length:    {maximum: 100},
