@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.1.1'
+ruby '3.1.2'
 
 # FRAMEWORK
 gem 'bootsnap', require: false
@@ -10,6 +10,7 @@ gem 'net-pop', require: false
 gem 'net-smtp', require: false
 gem 'rack-cors'
 gem 'rails'
+gem 'psych', '<4'
 
 # AUTH
 gem 'devise'
