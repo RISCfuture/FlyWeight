@@ -8,9 +8,9 @@ gem 'bootsnap', require: false
 gem 'net-imap', require: false
 gem 'net-pop', require: false
 gem 'net-smtp', require: false
+gem 'psych', '<4'
 gem 'rack-cors'
 gem 'rails'
-gem 'psych', '<4'
 
 # AUTH
 gem 'devise'

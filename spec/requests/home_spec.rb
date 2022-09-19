@@ -11,7 +11,7 @@ RSpec.describe 'Home', type: :request do
     it "renders the login and signup pages" do
       get '/'
       expect(response).to have_http_status(:success)
-      expect(assigns(:pilot)).to be_kind_of(Pilot)
+      expect(assigns(:pilot)).to be_a(Pilot)
     end
   end
 end
