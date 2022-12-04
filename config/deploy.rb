@@ -1,14 +1,16 @@
-require File.expand_path('./environment', __dir__)
+# frozen_string_literal: true
+
+require File.expand_path("./environment", __dir__)
 
 # config valid for current version and patch releases of Capistrano
-lock '~> 3.17.0'
+lock "~> 3.17.0"
 
-set :application, 'flyweight'
-set :user, 'deploy'
-set :repo_url, 'https://github.com/RISCfuture/FlyWeight.git'
+set :application, "flyweight"
+set :user, "deploy"
+set :repo_url, "https://github.com/RISCfuture/FlyWeight.git"
 
 # Default branch is :master
-set :branch, 'main'
+set :branch, "main"
 
 # Default deploy_to directory is /var/www/my_app_name
 set :deploy_to, "/var/www/flyweight.org"
@@ -24,14 +26,14 @@ set :deploy_to, "/var/www/flyweight.org"
 # set :pty, true
 
 # Default value for :linked_files is []
-append :linked_files, 'config/master.key'
+append :linked_files, "config/master.key"
 
 # Default value for linked_dirs is []
-append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets',
-       'node_modules', 'public/packs'
+append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets",
+       "node_modules", "public/packs"
 
 # Default value for default_env is {}
-set :default_env, {path: '/usr/local/nvm/versions/node/v16.13.0/bin:$PATH'}
+set :default_env, {path: "/usr/local/nvm/versions/node/v16.13.0/bin:$PATH"}
 
 # Default value for local_user is ENV['USER']
 # set :local_user, -> { `git config user.name`.chomp }
@@ -42,14 +44,14 @@ set :default_env, {path: '/usr/local/nvm/versions/node/v16.13.0/bin:$PATH'}
 # Uncomment the following to require manually verifying the host key before first deploy.
 # set :ssh_options, verify_host_key: :secure
 
-set :rvm_ruby_version, "3.1.2@#{fetch :application}"
-set :sidekiq_config, 'config/sidekiq.yml'
+set :rvm_ruby_version, "3.1.3@#{fetch :application}"
+set :sidekiq_config, "config/sidekiq.yml"
 set :bugsnag_api_key, Rails.application.credentials.bugsnag_api_key
 
 namespace :deploy do
   task :restart do
     on roles(:app) do
-      sudo 'systemctl', 'restart', 'rails-flyweight'
+      sudo "systemctl", "restart", "rails-flyweight"
     end
   end
 end
@@ -57,11 +59,11 @@ end
 namespace :sidekiq do
   task :restart do
     on roles(:app) do
-      sudo 'systemctl', 'restart', 'sidekiq-flyweight'
+      sudo "systemctl", "restart", "sidekiq-flyweight"
     end
   end
 end
 
-after 'deploy:finished', 'deploy:restart'
-after 'deploy:finished', 'sidekiq:restart'
-after 'deploy:updated', 'webpacker:precompile'
+after "deploy:finished", "deploy:restart"
+after "deploy:finished", "sidekiq:restart"
+after "deploy:updated", "webpacker:precompile"

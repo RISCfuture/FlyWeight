@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # @abstract
 #
 # Abstract superclass for FlyWeight controllers. All responses are HTML or
@@ -27,25 +29,25 @@ class ApplicationController < ActionController::Base
 
   rescue_from(ActiveRecord::RecordNotFound, ActionController::RoutingError) do |_error|
     respond_to do |format|
-      format.html { render file: 'public/404.html', status: :not_found, layout: false }
+      format.html { render file: "public/404.html", status: :not_found, layout: false }
     end
   end
 
   rescue_from(ActionController::BadRequest) do
     respond_to do |format|
-      format.html { render file: 'public/400.html', status: :bad_request, layout: false }
+      format.html { render file: "public/400.html", status: :bad_request, layout: false }
     end
   end
 
   rescue_from(ActionController::MethodNotAllowed) do
     respond_to do |format|
-      format.html { render file: 'public/405.html', status: :method_not_allowed, layout: false }
+      format.html { render file: "public/405.html", status: :method_not_allowed, layout: false }
     end
   end
 
   rescue_from(ActionController::UnknownFormat) do
     respond_to do |format|
-      format.html { render file: 'public/406.html', status: :not_acceptable, layout: false }
+      format.html { render file: "public/406.html", status: :not_acceptable, layout: false }
     end
   end
 

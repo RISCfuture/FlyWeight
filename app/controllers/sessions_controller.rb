@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Overrides the actions in `Devise::SessionsController` to include Turbo
 # Streams support.
 
@@ -30,7 +32,7 @@ class SessionsController < Devise::SessionsController
         if resource&.persisted?
           redirect_to flights_url
         else
-          render 'home/index'
+          render "home/index"
         end
       end
     end

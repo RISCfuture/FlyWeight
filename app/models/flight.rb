@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # A Flight is created by a {Pilot} so that passengers can list their weights by
 # adding {Passenger} records. Flights cannot be viewed or edited by passengers,
 # and are only available to pilots for one week after their scheduled date (see
@@ -32,10 +34,10 @@ class Flight < ApplicationRecord
   include Turbo::Broadcastable
 
   belongs_to :pilot
-  has_many :loads, class_name: 'Passenger', dependent: :delete_all
+  has_many :loads, class_name: "Passenger", dependent: :delete_all
   # rubocop:disable Rails/HasManyOrHasOneDependent,Rails/InverseOf
   has_many :passengers, -> { passengers }
-  has_many :baggage, -> { baggage }, class_name: 'Passenger', foreign_key: 'flight_id'
+  has_many :baggage, -> { baggage }, class_name: "Passenger", foreign_key: "flight_id"
   # rubocop:enable Rails/HasManyOrHasOneDependent,Rails/InverseOf
 
   validates :description,

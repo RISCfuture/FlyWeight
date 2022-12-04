@@ -1,18 +1,20 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
   if Rails.env.production?
-    mount ActionCable.server => '/cable'
+    mount ActionCable.server => "/cable"
   end
 
   devise_for :pilots, controllers: {
-      sessions:      'sessions',
-      registrations: 'registrations'
+      sessions:      "sessions",
+      registrations: "registrations"
   }
 
   resources :flights, except: :edit do
     resources :passengers, only: %i[show create destroy]
   end
 
-  root 'home#index'
+  root "home#index"
 end

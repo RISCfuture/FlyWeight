@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # RESTful controller for viewing and creating {Flight}s.
 #
 # Only the {#show} action is available to non-pilots.
@@ -18,8 +20,8 @@ class FlightsController < ApplicationController
     @flights   = current_pilot.flights.
         not_ancient.
         order(date: :asc, created_at: :asc).
-        limit(50) #TODO pagination
-    pax_counts = @flights.reorder('').joins(:passengers).group(:flight_id).count
+        limit(50) #TODO: pagination
+    pax_counts = @flights.reorder("").joins(:passengers).group(:flight_id).count
     @flights   = @flights.to_a
 
     @flights.each do |flight|
@@ -55,7 +57,7 @@ class FlightsController < ApplicationController
     @baggage = @flight.baggage.build(weight: 0)
 
     respond_to do |format|
-      format.html { render(my_flight? ? 'edit' : 'show') }
+      format.html { render(my_flight? ? "edit" : "show") }
     end
   end
 
@@ -173,7 +175,7 @@ class FlightsController < ApplicationController
         else
           @passenger = @flight.passengers.build
           @baggage = @flight.baggage.build(weight: 0)
-          render(@flight.persisted? ? 'flights/edit' : 'flights/new')
+          render(@flight.persisted? ? "flights/edit" : "flights/new")
         end
       end
     end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Pilots are the primary users of the application, and the only ones which can
 # be authenticated. Pilots are uniquely identified by their email.
 # Authentication is handled by Devise.

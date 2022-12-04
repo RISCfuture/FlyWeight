@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 return unless Rails.env.test?
 
 Rails.application.load_tasks unless defined?(Rake::Task)

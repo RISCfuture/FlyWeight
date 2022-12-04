@@ -1,10 +1,12 @@
-require 'rails_helper'
+# frozen_string_literal: true
 
-RSpec.describe 'Passengers', type: :request do
+require "rails_helper"
+
+RSpec.describe "Passengers" do
   let(:pilot) { create :pilot }
   let(:flight) { create :flight, pilot: }
 
-  describe 'GET /flights/:flight_id/passengers/:id' do
+  describe "GET /flights/:flight_id/passengers/:id" do
     let(:passenger) { create :passenger, flight: }
     let(:url) { flight_passenger_url(flight, passenger) }
 
@@ -30,11 +32,11 @@ RSpec.describe 'Passengers', type: :request do
     end
   end
 
-  describe 'POST /flights/:flight_id/passengers' do
+  describe "POST /flights/:flight_id/passengers" do
     let(:pax_params) { attributes_for :passenger }
     let(:url) { flight_passengers_url(flight) }
 
-    context '[logged out]' do
+    context "[logged out]" do
       it "adds a passenger" do
         post url, params: {passenger: pax_params}
         expect(response).to redirect_to(flight_passenger_url(flight, flight.passengers.first))
@@ -42,17 +44,17 @@ RSpec.describe 'Passengers', type: :request do
       end
 
       it "adds a passenger without bags" do
-        post url, params: {passenger: pax_params.merge(bags_weight: '')}
+        post url, params: {passenger: pax_params.merge(bags_weight: "")}
         expect(response).to redirect_to(flight_passenger_url(flight, flight.passengers.first))
         expect(flight.passengers.count).to be(1)
         expect(flight.passengers.first.bags_weight).to be_zero
       end
 
       it "handles validation errors" do
-        pax_params[:weight] = 'not a number'
-        pax_params[:bags_weight] = 'not a number'
+        pax_params[:weight] = "not a number"
+        pax_params[:bags_weight] = "not a number"
         post url, params: {passenger: pax_params}
-        expect(response).to render_template('flights/show')
+        expect(response).to render_template("flights/show")
         expect(assigns(:passenger).errors.size).to be(4)
       end
 
@@ -66,7 +68,7 @@ RSpec.describe 'Passengers', type: :request do
       end
     end
 
-    context '[logged in as someone else]' do
+    context "[logged in as someone else]" do
       before(:each) { sign_in create(:pilot) }
 
       it "adds a passenger" do
@@ -76,17 +78,17 @@ RSpec.describe 'Passengers', type: :request do
       end
 
       it "adds a passenger without bags" do
-        post url, params: {passenger: pax_params.merge(bags_weight: '')}
+        post url, params: {passenger: pax_params.merge(bags_weight: "")}
         expect(response).to redirect_to(flight_passenger_url(flight, flight.passengers.first))
         expect(flight.passengers.count).to be(1)
         expect(flight.passengers.first.bags_weight).to be_zero
       end
 
       it "handles validation errors" do
-        pax_params[:weight] = 'not a number'
-        pax_params[:bags_weight] = 'not a number'
+        pax_params[:weight] = "not a number"
+        pax_params[:bags_weight] = "not a number"
         post url, params: {passenger: pax_params}
-        expect(response).to render_template('flights/show')
+        expect(response).to render_template("flights/show")
         expect(assigns(:passenger).errors.size).to be(4)
       end
 
@@ -100,7 +102,7 @@ RSpec.describe 'Passengers', type: :request do
       end
     end
 
-    context '[logged in]' do
+    context "[logged in]" do
       before(:each) { sign_in pilot }
 
       it "adds a passenger" do
@@ -110,23 +112,23 @@ RSpec.describe 'Passengers', type: :request do
       end
 
       it "adds a passenger without bags" do
-        post url, params: {passenger: pax_params.merge(bags_weight: '')}
+        post url, params: {passenger: pax_params.merge(bags_weight: "")}
         expect(response).to redirect_to(flight_url(flight))
         expect(flight.passengers.count).to be(1)
         expect(flight.passengers.first.bags_weight).to be_zero
       end
 
       it "handles validation errors" do
-        pax_params[:weight] = 'not a number'
-        pax_params[:bags_weight] = 'not a number'
+        pax_params[:weight] = "not a number"
+        pax_params[:bags_weight] = "not a number"
         post url, params: {passenger: pax_params}
-        expect(response).to render_template('flights/edit')
+        expect(response).to render_template("flights/edit")
         expect(assigns(:passenger).errors.size).to be(4)
       end
     end
   end
 
-  describe 'DELETE /flights/:flight_id/passengers/:id' do
+  describe "DELETE /flights/:flight_id/passengers/:id" do
     let(:passenger) { create :passenger, flight: }
     let(:url) { flight_passenger_url(flight, passenger) }
 
@@ -141,7 +143,7 @@ RSpec.describe 'Passengers', type: :request do
       expect(response).to have_http_status(:not_found)
     end
 
-    context '[logged in]' do
+    context "[logged in]" do
       before(:each) { sign_in pilot }
 
       it "deletes a passenger" do

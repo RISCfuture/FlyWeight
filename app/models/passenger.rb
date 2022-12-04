@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # A Passenger record stores the name and weight of a passenger who will
 # participate in a {Flight}. It is also used to record baggage not associated
 # with a passenger; in this case, `weight` is zero.
@@ -57,21 +59,21 @@ class Passenger < ApplicationRecord
   # @private
   def broadcast_action_later_to(*streamables, action: :append, target: broadcast_target_default, **)
     content = turbo_stream_action_tag(action, target:, template: stream_content) +
-      turbo_stream_action_tag(:replace, target: 'total-weight', template: total_weight_content)
+      turbo_stream_action_tag(:replace, target: "total-weight", template: total_weight_content)
     Turbo::StreamsChannel.broadcast_stream_to(*streamables, content:)
   end
 
   # @private
   def broadcast_replace_later_to(*streamables, **)
     content = turbo_stream_action_tag(:replace, target: self, template: stream_content) +
-      turbo_stream_action_tag(:replace, target: 'total-weight', template: total_weight_content)
+      turbo_stream_action_tag(:replace, target: "total-weight", template: total_weight_content)
     Turbo::StreamsChannel.broadcast_stream_to(*streamables, content:)
   end
 
   # @private
   def broadcast_remove_to(*streamables)
     content = turbo_stream_action_tag(:remove, target: self) +
-      turbo_stream_action_tag(:replace, target: 'total-weight', template: total_weight_content)
+      turbo_stream_action_tag(:replace, target: "total-weight", template: total_weight_content)
     Turbo::StreamsChannel.broadcast_stream_to(*streamables, content:)
   end
 
@@ -94,13 +96,13 @@ class Passenger < ApplicationRecord
   end
 
   def total_weight_content
-    ApplicationController.render partial: 'flights/total_weight', locals: {flight:}
+    ApplicationController.render partial: "flights/total_weight", locals: {flight:}
   end
 
   def total_weight_greater_than_zero
-    unless total_weight.positive?
-      errors.add :weight, :greater_than_or_equal_to, count: 0
-      errors.add :bags_weight, :greater_than_or_equal_to, count: 0
-    end
+    return if total_weight.positive?
+
+    errors.add :weight, :greater_than_or_equal_to, count: 0
+    errors.add :bags_weight, :greater_than_or_equal_to, count: 0
   end
 end

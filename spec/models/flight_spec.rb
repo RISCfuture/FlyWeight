@@ -1,7 +1,9 @@
-require 'rails_helper'
+# frozen_string_literal: true
 
-RSpec.describe Flight, type: :model do
-  describe '[hooks]' do
+require "rails_helper"
+
+RSpec.describe Flight do
+  describe "[hooks]" do
     it "has a UUID" do
       expect(create(:flight).uuid).not_to be_nil
     end

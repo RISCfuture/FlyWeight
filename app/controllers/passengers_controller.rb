@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # RESTful controller for creating and deleting passengers of a flight. Only
 # authenticated users can remove passengers; all other actions are available to
 # unauthenticated sessions.
@@ -95,11 +97,9 @@ class PassengersController < ApplicationController
   end
 
   def find_my_flight
-    if pilot_signed_in?
-      @flight = current_pilot.flights.find_by!(uuid: params[:flight_id])
-    else
-      raise ActiveRecord::RecordNotFound
-    end
+    raise ActiveRecord::RecordNotFound unless pilot_signed_in?
+
+    @flight = current_pilot.flights.find_by!(uuid: params[:flight_id])
   end
 
   def find_passenger
@@ -110,7 +110,7 @@ class PassengersController < ApplicationController
     pax_params = params.require(:passenger).
         permit(:name, :weight, :bags_weight, :covid19_vaccine,
                :covid19_test_negative, :covid19_vaccine_booster)
-    pax_params['bags_weight'] = '0' if pax_params['bags_weight'].blank?
+    pax_params["bags_weight"] = "0" if pax_params["bags_weight"].blank?
     return pax_params
   end
 
@@ -134,7 +134,7 @@ class PassengersController < ApplicationController
   end
 
   def validation_failure_template
-    my_flight? ? 'flights/edit' : 'flights/show'
+    my_flight? ? "flights/edit" : "flights/show"
   end
 
   def after_save_destination

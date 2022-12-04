@@ -1,9 +1,11 @@
-require 'rails_helper'
+# frozen_string_literal: true
 
-RSpec.describe 'Flights', type: :request do
+require "rails_helper"
+
+RSpec.describe "Flights" do
   let(:pilot) { create :pilot }
 
-  describe 'GET /flights' do
+  describe "GET /flights" do
     before :each do
       @flights = create_list(:flight, 10, pilot:)
       # red herrings
@@ -24,72 +26,72 @@ RSpec.describe 'Flights', type: :request do
     end
   end
 
-  describe 'GET /flights/:id' do
+  describe "GET /flights/:id" do
     let(:flight) { create :flight, pilot: }
     let(:url) { flight_url(flight) }
 
     it "renders the 'show' action if not signed in" do
       get url
-      expect(response).to render_template('show')
+      expect(response).to render_template("show")
       expect(assigns(:flight)).to eql(flight)
     end
 
     it "renders the 'show' action if signed in as a different pilot" do
       sign_in create(:pilot)
       get url
-      expect(response).to render_template('show')
+      expect(response).to render_template("show")
       expect(assigns(:flight)).to eql(flight)
     end
 
     it "renders the 'edit' action if signed in as the creating pilot" do
       sign_in pilot
       get url
-      expect(response).to render_template('edit')
+      expect(response).to render_template("edit")
       expect(assigns(:flight)).to eql(flight)
     end
   end
 
-  describe 'GET /flights/new' do
+  describe "GET /flights/new" do
     it "redirects if not logged in" do
-      get '/flights/new'
+      get "/flights/new"
       expect(response).to redirect_to(new_pilot_session_url)
     end
 
     it "renders if logged in" do
       sign_in pilot
-      get '/flights/new'
+      get "/flights/new"
       expect(response).to have_http_status(:success)
       expect(assigns(:flight)).not_to be_nil
     end
   end
 
-  describe 'POST /flights' do
+  describe "POST /flights" do
     let(:flight_params) { attributes_for :flight }
 
     it "redirects if not logged in" do
-      post '/flights', params: {flight: flight_params}
+      post "/flights", params: {flight: flight_params}
       expect(response).to redirect_to(new_pilot_session_url)
     end
 
-    context '[logged in]' do
+    context "[logged in]" do
       before(:each) { sign_in pilot }
 
       it "creates a flight" do
-        post '/flights', params: {flight: flight_params}
+        post "/flights", params: {flight: flight_params}
         expect(response).to be_redirect
         expect(pilot.flights.count).to be(1)
       end
 
       it "handles validation errors" do
-        flight_params[:date] = 'not a date'
-        post '/flights', params: {flight: flight_params}
-        expect(response).to render_template('new')
+        flight_params[:date] = "not a date"
+        post "/flights", params: {flight: flight_params}
+        expect(response).to render_template("new")
         expect(assigns(:flight).errors.size).to be(1)
       end
     end
   end
 
-  describe 'PATCH /flights/:id' do
+  describe "PATCH /flights/:id" do
     let(:flight) { create :flight, pilot: }
     let(:flight_params) { attributes_for :flight }
     let(:url) { flight_url(flight) }
@@ -105,7 +107,7 @@ RSpec.describe 'Flights', type: :request do
       expect(response).to have_http_status(:not_found)
     end
 
-    context '[logged in]' do
+    context "[logged in]" do
       before(:each) { sign_in pilot }
 
       it "updates a flight" do
@@ -116,15 +118,15 @@ RSpec.describe 'Flights', type: :request do
       end
 
       it "handles validation errors" do
-        flight_params[:date] = 'not a date'
+        flight_params[:date] = "not a date"
         patch url, params: {flight: flight_params}
-        expect(response).to render_template('edit')
+        expect(response).to render_template("edit")
         expect(assigns(:flight).errors.size).to be(1)
       end
     end
   end
 
-  describe 'DELETE /flights/:id' do
+  describe "DELETE /flights/:id" do
     let(:flight) { create :flight, pilot: }
     let(:url) { flight_url(flight) }
 
@@ -139,7 +141,7 @@ RSpec.describe 'Flights', type: :request do
       expect(response).to have_http_status(:not_found)
     end
 
-    context '[logged in]' do
+    context "[logged in]" do
       before(:each) { sign_in pilot }
 
       it "deletes a flight" do
